@@ -3,7 +3,7 @@
 Cơ chế: gửi `repository_dispatch` tới GitHub → Actions chạy skill trên cloud.
 
 ## Chung
-- **Endpoint:** `POST https://api.github.com/repos/hoangminhhoagpt-dot/mentor-club/dispatches`
+- **Endpoint:** `POST https://api.github.com/repos/hoangminhhoagpt-dot/mentor-club-youtube/dispatches`
 - **Headers:**
   - `Authorization: Bearer <GITHUB_PAT>`  (PAT **classic**, scope `repo`)
   - `Accept: application/vnd.github+json`
@@ -39,7 +39,7 @@ Quét tất cả dòng "Chờ đăng" (bỏ record_id):
 ## Cấu hình trong Lark Base Automation
 Action **"Gửi yêu cầu HTTP" / Send HTTP request**:
 1. Method: **POST**
-2. URL: `https://api.github.com/repos/hoangminhhoagpt-dot/mentor-club/dispatches`
+2. URL: `https://api.github.com/repos/hoangminhhoagpt-dot/mentor-club-youtube/dispatches`
 3. Headers: 3 dòng như trên (dán PAT vào `Authorization`).
 4. Body (JSON): copy 1 mẫu ở trên. Để lấy `record_id` của dòng hiện tại, dùng biến bản ghi của Lark chèn vào chỗ `recXXXX`.
 
@@ -47,7 +47,7 @@ Action **"Gửi yêu cầu HTTP" / Send HTTP request**:
 ```powershell
 $H = @{ Authorization = "Bearer <PAT>"; Accept = "application/vnd.github+json" }
 $B = '{"event_type":"sync-youtube","client_payload":{"channel":"@hoangminhhoaoffical"}}'
-Invoke-WebRequest -Method POST -Uri "https://api.github.com/repos/hoangminhhoagpt-dot/mentor-club/dispatches" -Headers $H -ContentType "application/json" -Body $B
+Invoke-WebRequest -Method POST -Uri "https://api.github.com/repos/hoangminhhoagpt-dot/mentor-club-youtube/dispatches" -Headers $H -ContentType "application/json" -Body $B
 # StatusCode 204 = OK
 ```
 

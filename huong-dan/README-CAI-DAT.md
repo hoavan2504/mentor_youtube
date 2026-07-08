@@ -17,8 +17,8 @@ Config nạp theo thứ tự: **biến môi trường (CI) → `config.local.jso
 
 1. **Clone repo:**
    ```bash
-   git clone https://github.com/hoangminhhoagpt-dot/mentor-club.git
-   cd mentor-club
+   git clone https://github.com/hoangminhhoagpt-dot/mentor-club-youtube.git
+   cd mentor-club-youtube
    ```
 2. **Tạo config cho từng skill** (copy file mẫu rồi điền token):
    ```bash

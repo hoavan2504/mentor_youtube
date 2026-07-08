@@ -1,6 +1,6 @@
 # Cấu hình GitHub Actions cho 2 skill YouTube
 
-Repo: **https://github.com/hoangminhhoagpt-dot/mentor-club**
+Repo: **https://github.com/hoangminhhoagpt-dot/mentor-club-youtube**
 
 ## 1. Secrets (bí mật) — Settings → Secrets and variables → Actions → tab **Secrets**
 | Secret | Dùng cho | Lấy ở đâu |
