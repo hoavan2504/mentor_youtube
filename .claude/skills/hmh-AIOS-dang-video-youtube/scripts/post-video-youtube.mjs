@@ -70,9 +70,13 @@ async function listPending() {
 }
 const updateRow = (rid, fields) => larkApi("PUT", `${T()}/records/${rid}`, { fields });
 
-async function downloadAttachment(fileToken, destPath) {
+async function downloadAttachment(att, destPath) {
   const token = await larkToken();
-  const r = await fetch(`${CFG.larkDomain}/open-apis/drive/v1/medias/${fileToken}/download`, {
+  // Attachment trong Bitable BẮT BUỘC kèm ?extra={bitablePerm...}; att.url đã có sẵn extra đúng tableId+rev.
+  const dlUrl = att && att.url && String(att.url).startsWith("http")
+    ? att.url
+    : `${CFG.larkDomain}/open-apis/drive/v1/medias/${att.file_token}/download`;
+  const r = await fetch(dlUrl, {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!r.ok) throw new Error(`Tải video từ Lark lỗi ${r.status}`);
@@ -160,7 +164,7 @@ async function main() {
     const tmp = path.join(os.tmpdir(), `yt-${row.record_id}-${att.name}`.replace(/[^\w.\-]/g, "_"));
     try {
       await updateRow(row.record_id, { "Trạng thái": "Đang đăng" });
-      const size = await downloadAttachment(att.file_token, tmp);
+      const size = await downloadAttachment(att, tmp);
 
       const desc = (f["Mô tả"]?.text ?? f["Mô tả"] ?? "").toString();
       const tagsRaw = (f["Tags"]?.text ?? f["Tags"] ?? "").toString();
